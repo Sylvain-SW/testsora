@@ -1,0 +1,20 @@
+name: Create Release on Milestone Close
+
+on:
+  milestone:
+    types: [closed]
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.milestone.title }}
+          name: Release ${{ github.event.milestone.title }}
+          body: |
+            Release automatique créée à la fermeture de la milestone ${{ github.event.milestone.title }}.
+            Voir les issues fermées dans cette milestone.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
