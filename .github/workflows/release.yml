@@ -3,7 +3,10 @@ name: Create Release on Milestone Close
 on:
   milestone:
     types: [closed]
-
+    
+permissions:
+  contents: write
+  
 jobs:
   create_release:
     runs-on: ubuntu-latest
